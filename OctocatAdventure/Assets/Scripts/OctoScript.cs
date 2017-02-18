@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class OctoScript : MonoBehaviour {
     Rigidbody2D rb;
+    Animator anim;
 
     public float harshness = 0.1f;
     float prevX = 0f, prevY = 0f;
@@ -16,21 +17,25 @@ public class OctoScript : MonoBehaviour {
 
     gmScript gm;
 
-	// Use this for initializationu
-	void Start () {
+    // Use this for initializationu
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
         gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        anim = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 
     private void FixedUpdate() {
         if (gm.bSwim) {
+            anim.SetBool("swimming", true);
             swim();
-        } else {
+        }
+        else {
+            anim.SetBool("swimming", false);
             walk();
         }
     }
@@ -42,13 +47,29 @@ public class OctoScript : MonoBehaviour {
         // Get X velocity for horizontal moving
         velX = Mathf.Lerp(prevX, Input.GetAxisRaw("Horizontal") * maxSpeed, harshness);
 
+        if (velX < -0.2) {
+            anim.SetInteger("dir", -1);
+        }
+        else if (velX > 0.2) {
+            anim.SetInteger("dir", 1);
+        }
+        else {
+            anim.SetInteger("dir", 0);
+        }
+
+        if (numJumps > 0) {
+            anim.SetInteger("dir", 0);
+        }
+
         // Check for jump key press
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && numJumps < gm.maxJumps) {
             // Add vertical force as impulse
             rb.AddForce(Vector2.up * gm.jumpImpulse, ForceMode2D.Impulse);
             ++numJumps;
+
+            anim.SetBool("grounded", false);
         }
-         // Update velocity. We keep y vel the same because PHYSICZ
+        // Update velocity. We keep y vel the same because PHYSICZ
         rb.velocity = new Vector2(velX, rb.velocity.y);
         prevX = velX; // Update previous X for Lerping
     }
@@ -77,6 +98,7 @@ public class OctoScript : MonoBehaviour {
 
         if (other.CompareTag("Wall") && whereOther.y < 0) {
             numJumps = 0;
+            anim.SetBool("grounded", true);
         }
     }
 
