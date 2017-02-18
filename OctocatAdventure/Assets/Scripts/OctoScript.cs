@@ -28,6 +28,7 @@ public class OctoScript : MonoBehaviour {
 
     private void FixedUpdate() {
         harshness = gm.movHarshness;
+		float delayTime = gm.inputDelay;
 
         velX = Mathf.Lerp(prevX, Input.GetAxisRaw("Horizontal") * maxSpeed, harshness);
         velY = Mathf.Lerp(prevY, Input.GetAxisRaw("Vertical") * maxSpeed, harshness);

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class gmScript : MonoBehaviour {
     public float movHarshness = 0.1f;
+	public float inputDelay = 0f;
     GameObject pPanel;
     bool pauseActive = true;
 
@@ -21,6 +22,7 @@ public class gmScript : MonoBehaviour {
 
         if (pPanel.activeInHierarchy) {
             movHarshness = GameObject.Find("HarshSlider").GetComponent<Slider>().value;
+			inputDelay = GameObject.Find("DelaySlider").GetComponent<Slider>().value;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && pPanel != null) {
