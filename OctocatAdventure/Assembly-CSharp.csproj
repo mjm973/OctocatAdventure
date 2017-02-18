@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\EnemyWalk.cs" />
      <Compile Include="Assets\Scripts\OctoScript.cs" />
      <Compile Include="Assets\Scripts\SnapToGrid.cs" />
+     <Compile Include="Assets\Scripts\bubScript.cs" />
      <Compile Include="Assets\Scripts\gmScript.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>

@@ -15,6 +15,7 @@ public class OctoScript : MonoBehaviour {
     public float delayTime = 0.1f;
     int numJumps = 0;
 
+	public GameObject bub;
     gmScript gm;
 
     // Use this for initializationu
@@ -38,6 +39,10 @@ public class OctoScript : MonoBehaviour {
             anim.SetBool("swimming", false);
             walk();
         }
+
+		if (Input.GetKeyDown(KeyCode.Return)) {
+			shoot();
+		}
     }
 
     void walk() {
@@ -91,6 +96,11 @@ public class OctoScript : MonoBehaviour {
         prevX = velX;
         prevY = velY;
     }
+
+	void shoot() {
+		GameObject bubble = (GameObject) Instantiate(bub, transform.position + Vector3.right*0.5f, Quaternion.identity);
+		bubble.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 0);
+	}	
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject other = collision.gameObject;
