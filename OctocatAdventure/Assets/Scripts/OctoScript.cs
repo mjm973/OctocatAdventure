@@ -11,6 +11,8 @@ public class OctoScript : MonoBehaviour {
     float velX = 0, velY = 0;
     float maxSpeed = 4f;
 
+    public float delayTime = 0.1f;
+
     gmScript gm;
 
 	// Use this for initialization
@@ -29,10 +31,19 @@ public class OctoScript : MonoBehaviour {
 
         velX = Mathf.Lerp(prevX, Input.GetAxisRaw("Horizontal") * maxSpeed, harshness);
         velY = Mathf.Lerp(prevY, Input.GetAxisRaw("Vertical") * maxSpeed, harshness);
-        rb.velocity = new Vector2(velX, velY);
+        
+        if (velX != 0 || velY != 0) {
+            StartCoroutine("InDelay", new float[] {prevX, prevY, delayTime});
+        }
 
         // Assign new velocity to previous in preparation for next frame
         prevX = velX;
         prevY = velY;
+    }
+
+    IEnumerator InDelay(float[] xyt) {
+        yield return new WaitForSeconds(xyt[2]);
+
+        rb.velocity = new Vector2(xyt[0], xyt[1]);
     }
 }
