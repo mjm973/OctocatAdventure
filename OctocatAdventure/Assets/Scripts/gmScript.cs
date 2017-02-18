@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class gmScript : MonoBehaviour {
+    public float camHarshness = 0.05f;
     public float movHarshness = 0.1f;
 	public float inputDelay = 0f;
     public int maxJumps = 1;
@@ -28,7 +29,8 @@ public class gmScript : MonoBehaviour {
 
         if (pPanel.activeInHierarchy) {
             movHarshness = GameObject.Find("HarshSlider").GetComponent<Slider>().value;
-			inputDelay = GameObject.Find("DelaySlider").GetComponent<Slider>().value;
+            camHarshness = GameObject.Find("CamSlider").GetComponent<Slider>().value;
+            inputDelay = GameObject.Find("DelaySlider").GetComponent<Slider>().value;
 			gravity = GameObject.Find("GravitySlider").GetComponent<Slider>().value;
 			jumpImpulse = GameObject.Find("ImpulseSlider").GetComponent<Slider>().value;
 			//dropdown value plus 1 to match the options 
