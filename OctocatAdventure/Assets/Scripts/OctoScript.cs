@@ -12,7 +12,7 @@ public class OctoScript : MonoBehaviour {
     float maxSpeed = 4f;
 
     public float delayTime = 0.1f;
-    bool bInAir = false;
+    int numJumps = 0;
 
     gmScript gm;
 
@@ -37,16 +37,16 @@ public class OctoScript : MonoBehaviour {
 
     void walk() {
         // Turn on gravity
-        rb.gravityScale = 1f;
+        rb.gravityScale = gm.gravity;
 
         // Get X velocity for horizontal moving
         velX = Mathf.Lerp(prevX, Input.GetAxisRaw("Horizontal") * maxSpeed, harshness);
 
         // Check for jump key press
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && !bInAir) {
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && numJumps < gm.maxJumps) {
             // Add vertical force as impulse
-            rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
-            bInAir = true;
+            rb.AddForce(Vector2.up * gm.jumpImpulse, ForceMode2D.Impulse);
+            ++numJumps;
         }
          // Update velocity. We keep y vel the same because PHYSICZ
         rb.velocity = new Vector2(velX, rb.velocity.y);
@@ -73,9 +73,10 @@ public class OctoScript : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject other = collision.gameObject;
+        Vector2 whereOther = (Vector2)(other.transform.position - transform.position);
 
-        if (other.CompareTag("Wall")) {
-            bInAir = false;
+        if (other.CompareTag("Wall") && whereOther.y < 0) {
+            numJumps = 0;
         }
     }
 

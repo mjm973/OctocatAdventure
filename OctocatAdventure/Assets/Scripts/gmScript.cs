@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class gmScript : MonoBehaviour {
     public float movHarshness = 0.1f;
 	public float inputDelay = 0f;
+    public int maxJumps = 1;
+    public float gravity = 1f;
+    public float jumpImpulse = 10f;
+       
+    public bool bSwim = false;
+
     GameObject pPanel;
     bool pauseActive = true;
 
-    public bool bSwim = false;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         Time.timeScale = 0f;
 	}
 	
