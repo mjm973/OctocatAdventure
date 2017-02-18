@@ -1,4 +1,8 @@
 Library
 Temp
 OctocatAdventure.csproj
-OcticatAdventure.sln
+OctocatAdventure.sln
+obj
+Assembly-CSharp.csproj
+OctocatAdventure.userprefs
+.vs
