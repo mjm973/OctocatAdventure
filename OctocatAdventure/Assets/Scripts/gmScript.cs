@@ -9,6 +9,8 @@ public class gmScript : MonoBehaviour {
     GameObject pPanel;
     bool pauseActive = true;
 
+    public bool bSwim = false;
+
 	// Use this for initialization
 	void Start () {
         Time.timeScale = 0f;
