@@ -16,7 +16,7 @@ public class OctoScript : MonoBehaviour {
 
     gmScript gm;
 
-	// Use this for initialization
+	// Use this for initializationu
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
