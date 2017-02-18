@@ -10,7 +10,7 @@ public class gmScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    	
+        Time.timeScale = 0f;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +25,13 @@ public class gmScript : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space) && pPanel != null) {
             pauseActive = !pauseActive;
+
+            if (pauseActive) {
+                Time.timeScale = 0f;
+            } else {
+                Time.timeScale = 1f;
+            }
+
             pPanel.SetActive(pauseActive);
         }
     }
