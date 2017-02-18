@@ -14,6 +14,7 @@ public class OctoScript : MonoBehaviour {
 
     public float delayTime = 0.1f;
     int numJumps = 0;
+	int dir = 1;
 
 	public GameObject bub;
     gmScript gm;
@@ -54,9 +55,11 @@ public class OctoScript : MonoBehaviour {
 
         if (velX < -0.2) {
             anim.SetInteger("dir", -1);
+			dir = -1;
         }
         else if (velX > 0.2) {
             anim.SetInteger("dir", 1);
+			dir = 1;
         }
         else {
             anim.SetInteger("dir", 0);
@@ -98,8 +101,8 @@ public class OctoScript : MonoBehaviour {
     }
 
 	void shoot() {
-		GameObject bubble = (GameObject) Instantiate(bub, transform.position + Vector3.right*0.5f, Quaternion.identity);
-		bubble.GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 0);
+		GameObject bubble = (GameObject) Instantiate(bub, transform.position + Vector3.right*0.5f*dir, Quaternion.identity);
+		bubble.GetComponent<Rigidbody2D>().velocity = new Vector2(2f*dir, 0);
 	}	
 
     private void OnCollisionEnter2D(Collision2D collision) {
