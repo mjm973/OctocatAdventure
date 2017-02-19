@@ -48,21 +48,7 @@ public class gmScript : MonoBehaviour {
 
 
 		shButton = GameObject.Find("ShowHideBtn").GetComponent<Button>();
-		shButton.onClick.AddListener(showHidePanel);
-			
-
-//        if (Input.GetKeyDown(KeyCode.Space) && pPanel != null) {
-//            pauseActive = !pauseActive;
-//
-//            if (pauseActive) {
-//                Time.timeScale = 0f;
-//            } else {
-//                Time.timeScale = 1f;
-//            }
-//
-//            pPanel.SetActive(pauseActive);
-//        }
-
+		shButton.onClick.AddListener(this.showHidePanel);
     }
 
 	void showHidePanel() {
