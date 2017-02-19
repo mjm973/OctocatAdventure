@@ -20,9 +20,10 @@ public class bubScript : MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D collision) {
 		GameObject other = collision.gameObject;
 		if (other.CompareTag ("Enemy")) {
+			Destroy (gameObject);
 			Destroy (other);
-		}
-
-		Destroy (gameObject);
+		} else if (other.CompareTag ("Wall")) {
+			//do nothing 
+		}			
 	}
 }

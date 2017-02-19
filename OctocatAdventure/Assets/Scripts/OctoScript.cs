@@ -101,8 +101,21 @@ public class OctoScript : MonoBehaviour {
     }
 
 	void shoot() {
+		float speed = gm.bubSpeed;
+		bool gravity = gm.bubGravity;
+		Debug.Log(gravity); 
+			
 		GameObject bubble = (GameObject) Instantiate(bub, transform.position + Vector3.right*0.5f*dir, Quaternion.identity);
-		bubble.GetComponent<Rigidbody2D>().velocity = new Vector2(2f*dir, 0);
+		Rigidbody2D rb = bubble.GetComponent<Rigidbody2D>();
+
+		if (gravity) {
+			rb.gravityScale = 1f;
+		} else {
+			rb.gravityScale = 0f;
+		}
+
+		rb.velocity = new Vector2(speed*dir, 0);
+
 	}	
 
     private void OnCollisionEnter2D(Collision2D collision) {

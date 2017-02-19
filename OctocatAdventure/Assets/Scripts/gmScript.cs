@@ -10,6 +10,9 @@ public class gmScript : MonoBehaviour {
     public int maxJumps = 1;
     public float gravity = 1f;
     public float jumpImpulse = 5f;
+
+	public float bubSpeed = 2f;
+	public bool bubGravity = false;
        
     public bool bSwim = false;
 
@@ -35,6 +38,9 @@ public class gmScript : MonoBehaviour {
 			jumpImpulse = GameObject.Find("ImpulseSlider").GetComponent<Slider>().value;
 			//dropdown value plus 1 to match the options 
 			maxJumps = GameObject.Find("JumpsNum").GetComponent<Dropdown>().value + 1;
+
+			bubSpeed = GameObject.Find("BubSpeedSlider").GetComponent<Slider>().value;
+			bubGravity = GameObject.Find("BubGravityToggle").GetComponent<Toggle>().isOn;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && pPanel != null) {
