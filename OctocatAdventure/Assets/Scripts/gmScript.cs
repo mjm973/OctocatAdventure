@@ -26,8 +26,6 @@ public class gmScript : MonoBehaviour {
 	GameObject playerTab, bubbleTab;
 	GameObject[] playerControls, bubbleControls; 
 
-	Toggle pToggle, bToggle;
-
     // Use this for initialization
     void Start () {
         Time.timeScale = 0f;
@@ -44,13 +42,10 @@ public class gmScript : MonoBehaviour {
             pPanel = GameObject.Find("PausePanel");
         }
 
-		bool ptabIsOn = true;
-		bool btabIsOn = false;
-
         if (pPanel.activeInHierarchy) {
 
-			ptabIsOn = playerTab.GetComponent<Toggle> ().isOn;
-			btabIsOn = bubbleTab.GetComponent<Toggle> ().isOn;
+			bool ptabIsOn = playerTab.GetComponent<Toggle> ().isOn;
+			bool btabIsOn = bubbleTab.GetComponent<Toggle> ().isOn;
 
 
 			if ((ptabIsOn && pPrev == false) || (!ptabIsOn && pPrev == true)) {
@@ -72,9 +67,14 @@ public class gmScript : MonoBehaviour {
 				pPrev = ptabIsOn;
 
 			} else {
-//				foreach (GameObject i in playerControls) {
-//					i.SetActive (false);
-//				}
+
+				movHarshness = GameObject.Find ("HarshSlider").GetComponent<Slider> ().value;
+				camHarshness = GameObject.Find ("CamSlider").GetComponent<Slider> ().value;
+				inputDelay = GameObject.Find ("DelaySlider").GetComponent<Slider> ().value;
+				gravity = GameObject.Find ("GravitySlider").GetComponent<Slider> ().value;
+				jumpImpulse = GameObject.Find ("ImpulseSlider").GetComponent<Slider> ().value;
+				//dropdown value plus 1 to match the options 
+				maxJumps = GameObject.Find ("JumpsNum").GetComponent<Dropdown> ().value + 1;
 			}
 
 			if ((btabIsOn && bPrev == false) || (!btabIsOn && bPrev == true)) {
@@ -89,12 +89,13 @@ public class gmScript : MonoBehaviour {
 				bubGravity = GameObject.Find ("BubGravityToggle").GetComponent<Toggle> ().isOn;
 				bubBounce = GameObject.Find ("BubBounceToggle").GetComponent<Toggle> ().isOn; 
 
+
 				bPrev = btabIsOn;
 
 			} else {
-//				foreach (GameObject i in bubbleControls) {
-//					i.SetActive (false);
-//				}
+				bubSpeed = GameObject.Find ("BubSpeedSlider").GetComponent<Slider> ().value;
+				bubGravity = GameObject.Find ("BubGravityToggle").GetComponent<Toggle> ().isOn;
+				bubBounce = GameObject.Find ("BubBounceToggle").GetComponent<Toggle> ().isOn; 
 			}
 
         }
