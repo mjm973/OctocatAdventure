@@ -38,7 +38,7 @@ public class EnemyWalk : MonoBehaviour {
     private void FixedUpdate() {
         rb.velocity = new Vector2(2 * dir, rb.velocity.y);
 
-        if (atEdge()) {
+        if (atEdge() || bumpWall()) {
             bRight = !bRight;
             anim.SetBool("right", bRight);
             dir *= -1;
@@ -58,13 +58,25 @@ public class EnemyWalk : MonoBehaviour {
         return true;
     }
 
+    bool bumpWall() {
+        RaycastHit2D[] hits = Physics2D.RaycastAll((Vector2)transform.position, new Vector2(dir, 0), 0.4f);
+        if (hits.Length > 0) {
+            foreach (RaycastHit2D hit in hits) {
+                if (hit.collider.gameObject.CompareTag("Wall")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     void damage(int amount) {
         health -= amount;
 
-        StartCoroutine("blink");
+        StartCoroutine("blink", sr);
 
 
-        StartCoroutine("colors");
+        StartCoroutine("colors", sr);
 
 
         cam.SendMessage("Shake", new Vector2(0.3f, 1.5f));
@@ -77,37 +89,37 @@ public class EnemyWalk : MonoBehaviour {
             aud.PlayOneShot(hurt);
         }        
     }
-    
-    IEnumerator blink() {
-        Color col = sr.color;
+
+    IEnumerator blink(SpriteRenderer s) {
+        Color col = s.color;
         for (int q = 0; q < 3; ++q) {
             col.a = 0.2f;
-            sr.color = col;
+            s.color = col;
 
             yield return new WaitForSeconds(0.1f);
 
             col.a = 1f;
-            sr.color = col;
+            s.color = col;
 
             yield return new WaitForSeconds(0.1f);
         }
         col.a = 1f;
-        sr.color = col;
+        s.color = col;
     }
 
-    IEnumerator colors() {
-        Color col = sr.color;
+    IEnumerator colors(SpriteRenderer s) {
+        Color col = s.color;
         Color temp = Color.yellow;
         for (int q = 0; q < 3; ++q) {
-            sr.color = temp;
+            s.color = temp;
 
             yield return new WaitForSeconds(0.1f);
 
-            sr.color = col;
+            s.color = col;
 
             yield return new WaitForSeconds(0.1f);
         }
         col.a = 1f;
-        sr.color = col;
+        s.color = col;
     }
 }

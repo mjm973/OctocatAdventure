@@ -7,6 +7,7 @@ public class OctoScript : MonoBehaviour {
     Rigidbody2D rb;
     Animator anim;
     AudioSource aud;
+    SpriteRenderer sr;
 
     public float harshness = 0.1f;
     float prevX = 0f, prevY = 0f;
@@ -17,26 +18,36 @@ public class OctoScript : MonoBehaviour {
     int numJumps = 0;
     int dir = 1;
 
+    float _mOuchTime = 0.2f;
+    float ouchTime = 0;
+
     [Header("PARTICLEZ!!!")]
     public GameObject bub;
     public GameObject stars;
-    
+
     [Header("Audio")]
     public AudioClip jumpy;
     public AudioClip shooty;
+    public AudioClip hurt;
+
     gmScript gm;
+    GameObject cam;
 
     // Use this for initializationu
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
+        sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
+        cam = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
     void Update() {
-
+        if (Input.GetKeyDown(KeyCode.J)) {
+            shoot();
+        }
     }
 
     private void FixedUpdate() {
@@ -49,9 +60,7 @@ public class OctoScript : MonoBehaviour {
             walk();
         }
 
-		if (Input.GetKeyDown(KeyCode.J)) {
-			shoot();
-		}
+        ouchTime -= Time.fixedDeltaTime;
     }
 
     void walk() {
@@ -89,7 +98,9 @@ public class OctoScript : MonoBehaviour {
             anim.SetBool("grounded", false);
         }
         // Update velocity. We keep y vel the same because PHYSICZ
-        rb.velocity = new Vector2(velX, rb.velocity.y);
+        if (ouchTime <= 0) {
+            rb.velocity = new Vector2(velX, rb.velocity.y);
+        }
         prevX = velX; // Update previous X for Lerping
     }
 
@@ -143,6 +154,20 @@ public class OctoScript : MonoBehaviour {
 
             numJumps = 0;
             anim.SetBool("grounded", true);
+        } else if (other.CompareTag("Enemy") && ouchTime <= 0) {
+            ouchTime = _mOuchTime;
+
+            aud.PlayOneShot(hurt);
+
+            rb.AddForce(-whereOther * 10f, ForceMode2D.Impulse);
+
+            anim.SetTrigger("hurt");
+
+            StartCoroutine("blink", sr);
+
+            StartCoroutine("colors", sr);
+
+            cam.SendMessage("Shake", new Vector2(0.3f, 1.5f));
         }
     }
 
@@ -150,5 +175,38 @@ public class OctoScript : MonoBehaviour {
         yield return new WaitForSeconds(xyt[2]);
 
         rb.velocity = new Vector2(xyt[0], xyt[1]);
+    }
+
+    IEnumerator blink(SpriteRenderer s) {
+        Color col = s.color;
+        for (int q = 0; q < 3; ++q) {
+            col.a = 0.2f;
+            s.color = col;
+
+            yield return new WaitForSeconds(0.1f);
+
+            col.a = 1f;
+            s.color = col;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        col.a = 1f;
+        s.color = col;
+    }
+
+    IEnumerator colors(SpriteRenderer s) {
+        Color col = s.color;
+        Color temp = Color.yellow;
+        for (int q = 0; q < 3; ++q) {
+            s.color = temp;
+
+            yield return new WaitForSeconds(0.1f);
+
+            s.color = col;
+
+            yield return new WaitForSeconds(0.1f);
+        }
+        col.a = 1f;
+        s.color = Color.white;
     }
 }
