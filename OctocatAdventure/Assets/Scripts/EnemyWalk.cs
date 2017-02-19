@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemyWalk : MonoBehaviour {
     Rigidbody2D rb;
+    Animator anim;
     gmScript gm;
     int dir = 1;
+    bool bRight = false;
 
     RaycastHit2D[] _maybeRaycast;
 
@@ -13,6 +15,7 @@ public class EnemyWalk : MonoBehaviour {
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
+        anim = GetComponent<Animator>();
         _maybeRaycast = new RaycastHit2D[10];
     }
 	
@@ -25,6 +28,8 @@ public class EnemyWalk : MonoBehaviour {
         rb.velocity = new Vector2(2 * dir, rb.velocity.y);
 
         if (atEdge()) {
+            bRight = !bRight;
+            anim.SetBool("right", bRight);
             dir *= -1;
         }
     }
