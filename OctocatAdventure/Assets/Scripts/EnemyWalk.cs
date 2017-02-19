@@ -13,6 +13,7 @@ public class EnemyWalk : MonoBehaviour {
     bool bRight = false;
 
     GameObject cam;
+    public GameObject ded;
 
     RaycastHit2D[] _maybeRaycast;
 
@@ -66,6 +67,8 @@ public class EnemyWalk : MonoBehaviour {
         cam.SendMessage("Shake", new Vector2(0.3f, 1.5f));
 
         if (health <= 0) {
+            Instantiate(ded, transform.position, Quaternion.identity);
+
             Destroy(gameObject);
         }
     }

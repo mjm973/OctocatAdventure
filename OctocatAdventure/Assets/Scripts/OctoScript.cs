@@ -14,9 +14,10 @@ public class OctoScript : MonoBehaviour {
 
     public float delayTime = 0.1f;
     int numJumps = 0;
-	int dir = 1;
+    int dir = 1;
 
-	public GameObject bub;
+    public GameObject bub;
+    public GameObject stars;
     gmScript gm;
 
     // Use this for initializationu
@@ -41,9 +42,9 @@ public class OctoScript : MonoBehaviour {
             walk();
         }
 
-		if (Input.GetKeyDown(KeyCode.Return)) {
-			shoot();
-		}
+        if (Input.GetKeyDown(KeyCode.Return)) {
+            shoot();
+        }
     }
 
     void walk() {
@@ -55,11 +56,11 @@ public class OctoScript : MonoBehaviour {
 
         if (velX < -0.2) {
             anim.SetInteger("dir", -1);
-			dir = -1;
+            dir = -1;
         }
         else if (velX > 0.2) {
             anim.SetInteger("dir", 1);
-			dir = 1;
+            dir = 1;
         }
         else {
             anim.SetInteger("dir", 0);
@@ -100,29 +101,35 @@ public class OctoScript : MonoBehaviour {
         prevY = velY;
     }
 
-	void shoot() {
-		float speed = gm.bubSpeed;
-		bool gravity = gm.bubGravity;
-		Debug.Log(gravity); 
-			
-		GameObject bubble = (GameObject) Instantiate(bub, transform.position + Vector3.right*0.5f*dir, Quaternion.identity);
-		Rigidbody2D rb = bubble.GetComponent<Rigidbody2D>();
+    void shoot() {
+        float speed = gm.bubSpeed;
+        bool gravity = gm.bubGravity;
+        Debug.Log(gravity);
 
-		if (gravity) {
-			rb.gravityScale = 1f;
-		} else {
-			rb.gravityScale = 0f;
-		}
+        GameObject bubble = (GameObject)Instantiate(bub, transform.position + Vector3.right * 0.5f * dir, Quaternion.identity);
+        Rigidbody2D rb = bubble.GetComponent<Rigidbody2D>();
 
-		rb.velocity = new Vector2(speed*dir, 0);
+        if (gravity) {
+            rb.gravityScale = 1f;
+        }
+        else {
+            rb.gravityScale = 0f;
+        }
 
-	}	
+        rb.velocity = new Vector2(speed * dir, 0);
+
+    }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         GameObject other = collision.gameObject;
         Vector2 whereOther = (Vector2)(other.transform.position - transform.position);
 
         if (other.CompareTag("Wall") && whereOther.y < 0) {
+
+            if (numJumps > 0) {
+                Instantiate(stars, collision.contacts[0].point + Vector2.up * 0.1f, Quaternion.identity);
+            }
+
             numJumps = 0;
             anim.SetBool("grounded", true);
         }
