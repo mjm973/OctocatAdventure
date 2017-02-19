@@ -55,7 +55,13 @@ public class bubScript : MonoBehaviour {
             Destroy(gameObject);
         }
         else if (other.CompareTag("Wall")) {
-            //do nothing 
+            if (!gm.bubGravity) {
+
+                Instantiate(poppin, transform.position, Quaternion.identity);
+
+
+                Destroy(gameObject);
+            }
         }
     }
 }
