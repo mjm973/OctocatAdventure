@@ -41,7 +41,7 @@ public class OctoScript : MonoBehaviour {
             walk();
         }
 
-		if (Input.GetKeyDown(KeyCode.Return)) {
+		if (Input.GetKeyDown(KeyCode.J)) {
 			shoot();
 		}
     }

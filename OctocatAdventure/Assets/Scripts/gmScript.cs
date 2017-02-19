@@ -64,6 +64,7 @@ public class gmScript : MonoBehaviour {
     }
 
 	void showHidePanel() {
+		
 		if (pPanel != null) {
 			pauseActive = !pauseActive;
 
