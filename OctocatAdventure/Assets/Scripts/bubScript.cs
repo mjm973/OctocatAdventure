@@ -6,16 +6,25 @@ public class bubScript : MonoBehaviour {
     Rigidbody2D rb;
 	gmScript gm;
     public float lifetime = 5f;
-    public GameObject poppin;
+    
 	public bool bBounce = true;
 
-    public PhysicsMaterial2D bounce, normal;
+    [Header("Particlez!!!")]
+    public GameObject poppin;
+    public GameObject trail;
+
+    [Header("Materials")]
+    public PhysicsMaterial2D bounce;
+    public PhysicsMaterial2D normal;
 
     // Use this for initialization
     void Start() {
         rb = GetComponent<Rigidbody2D>();
 		gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
 		bBounce = gm.bubBounce;
+
+        GameObject tr = Instantiate(trail, transform.position, Quaternion.identity);
+        tr.transform.SetParent(transform);
     }
 
     // Update is called once per frame

@@ -17,9 +17,11 @@ public class OctoScript : MonoBehaviour {
     int numJumps = 0;
     int dir = 1;
 
+    [Header("PARTICLEZ!!!")]
     public GameObject bub;
     public GameObject stars;
-
+    
+    [Header("Audio")]
     public AudioClip jumpy;
     public AudioClip shooty;
     gmScript gm;
