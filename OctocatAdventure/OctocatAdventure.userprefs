@@ -1,12 +1,13 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
+﻿<Properties StartupItem="OctocatAdventure.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/OctoScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CameraTrack.cs">
     <Files>
-      <File FileName="Assets/Scripts/gmScript.cs" Line="45" Column="3" />
-      <File FileName="Assets/Scripts/OctoScript.cs" Line="110" Column="3" />
+      <File FileName="Assets/Scripts/gmScript.cs" Line="28" Column="18" />
+      <File FileName="Assets/Scripts/OctoScript.cs" Line="119" Column="4" />
       <File FileName="Assets/Scripts/bubScript.cs" Line="27" Column="7" />
       <File FileName="Assets/Scripts/SnapToGrid.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/EnemyWalk.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CameraTrack.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

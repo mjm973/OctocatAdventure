@@ -17,6 +17,7 @@ public class gmScript : MonoBehaviour {
     public bool bSwim = false;
 
     GameObject pPanel;
+	Button shButton; 
     bool pauseActive = true;
 
     // Use this for initialization
@@ -43,16 +44,39 @@ public class gmScript : MonoBehaviour {
 			bubGravity = GameObject.Find("BubGravityToggle").GetComponent<Toggle>().isOn;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && pPanel != null) {
-            pauseActive = !pauseActive;
 
-            if (pauseActive) {
-                Time.timeScale = 0f;
-            } else {
-                Time.timeScale = 1f;
-            }
+		shButton = GameObject.Find("ShowHideBtn").GetComponent<Button>();
+		shButton.onClick.AddListener(showHidePanel);
+			
 
-            pPanel.SetActive(pauseActive);
-        }
+//        if (Input.GetKeyDown(KeyCode.Space) && pPanel != null) {
+//            pauseActive = !pauseActive;
+//
+//            if (pauseActive) {
+//                Time.timeScale = 0f;
+//            } else {
+//                Time.timeScale = 1f;
+//            }
+//
+//            pPanel.SetActive(pauseActive);
+//        }
+
     }
+
+	void showHidePanel() {
+		if (pPanel != null) {
+			pauseActive = !pauseActive;
+
+			if (pauseActive) {
+				Time.timeScale = 0f;
+			} else {
+				Time.timeScale = 1f;
+			}
+
+			pPanel.SetActive(pauseActive);
+		}
+	}
+		
 }
+
+

@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctocatAdventure", "OctocatAdventure.csproj", "{97BEDC16-1D4D-2CF5-CE14-4739A6C646E0}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctocatAdventure", "Assembly-CSharp.csproj", "{9E369393-A00E-0C55-3858-402FAAB29E3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{97BEDC16-1D4D-2CF5-CE14-4739A6C646E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97BEDC16-1D4D-2CF5-CE14-4739A6C646E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97BEDC16-1D4D-2CF5-CE14-4739A6C646E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97BEDC16-1D4D-2CF5-CE14-4739A6C646E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E369393-A00E-0C55-3858-402FAAB29E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E369393-A00E-0C55-3858-402FAAB29E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E369393-A00E-0C55-3858-402FAAB29E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E369393-A00E-0C55-3858-402FAAB29E3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
