@@ -8,15 +8,26 @@ public class bubScript : MonoBehaviour {
     public float lifetime = 5f;
     public GameObject poppin;
 
+    public bool bBounce = true;
+    public PhysicsMaterial2D bounce, normal;
+
     // Use this for initialization
     void Start() {
-        //		rb = GetComponent<Rigidbody2D>();
-        //		gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
+        rb = GetComponent<Rigidbody2D>();
+        //gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
+
+
     }
 
     // Update is called once per frame
     void Update() {
         lifetime -= Time.deltaTime;
+
+        if (bBounce) {
+            rb.sharedMaterial = bounce;
+        } else {
+            rb.sharedMaterial = normal;
+        }
 
         if (lifetime <= 0) {
 

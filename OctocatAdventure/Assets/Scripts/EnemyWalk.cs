@@ -7,6 +7,7 @@ public class EnemyWalk : MonoBehaviour {
     SpriteRenderer sr;
     Animator anim;
     gmScript gm;
+    AudioSource aud;
 
     int health = 3;
     int dir = 1;
@@ -14,6 +15,7 @@ public class EnemyWalk : MonoBehaviour {
 
     GameObject cam;
     public GameObject ded;
+    public AudioClip hurt;
 
     RaycastHit2D[] _maybeRaycast;
 
@@ -24,6 +26,7 @@ public class EnemyWalk : MonoBehaviour {
         gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
         anim = GetComponent<Animator>();
         cam = GameObject.Find("Main Camera");
+        aud = GetComponent<AudioSource>();
         _maybeRaycast = new RaycastHit2D[10];
     }
 	
@@ -70,7 +73,9 @@ public class EnemyWalk : MonoBehaviour {
             Instantiate(ded, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
-        }
+        } else {
+            aud.PlayOneShot(hurt);
+        }        
     }
     
     IEnumerator blink() {
@@ -86,6 +91,8 @@ public class EnemyWalk : MonoBehaviour {
 
             yield return new WaitForSeconds(0.1f);
         }
+        col.a = 1f;
+        sr.color = col;
     }
 
     IEnumerator colors() {
@@ -100,5 +107,7 @@ public class EnemyWalk : MonoBehaviour {
 
             yield return new WaitForSeconds(0.1f);
         }
+        col.a = 1f;
+        sr.color = col;
     }
 }

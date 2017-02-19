@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class OctoScript : MonoBehaviour {
     Rigidbody2D rb;
     Animator anim;
+    AudioSource aud;
 
     public float harshness = 0.1f;
     float prevX = 0f, prevY = 0f;
@@ -18,6 +19,9 @@ public class OctoScript : MonoBehaviour {
 
     public GameObject bub;
     public GameObject stars;
+
+    public AudioClip jumpy;
+    public AudioClip shooty;
     gmScript gm;
 
     // Use this for initializationu
@@ -25,6 +29,7 @@ public class OctoScript : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
         anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -73,6 +78,9 @@ public class OctoScript : MonoBehaviour {
         // Check for jump key press
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && numJumps < gm.maxJumps) {
             // Add vertical force as impulse
+
+            aud.PlayOneShot(jumpy);
+
             rb.AddForce(Vector2.up * gm.jumpImpulse, ForceMode2D.Impulse);
             ++numJumps;
 
@@ -104,10 +112,11 @@ public class OctoScript : MonoBehaviour {
     void shoot() {
         float speed = gm.bubSpeed;
         bool gravity = gm.bubGravity;
-        Debug.Log(gravity);
 
         GameObject bubble = (GameObject)Instantiate(bub, transform.position + Vector3.right * 0.5f * dir, Quaternion.identity);
         Rigidbody2D rb = bubble.GetComponent<Rigidbody2D>();
+
+        aud.PlayOneShot(shooty);
 
         if (gravity) {
             rb.gravityScale = 1f;
@@ -127,7 +136,7 @@ public class OctoScript : MonoBehaviour {
         if (other.CompareTag("Wall") && whereOther.y < 0) {
 
             if (numJumps > 0) {
-                Instantiate(stars, collision.contacts[0].point + Vector2.up * 0.1f, Quaternion.identity);
+                Instantiate(stars, collision.contacts[0].point + Vector2.up * 0.25f, Quaternion.identity);
             }
 
             numJumps = 0;
