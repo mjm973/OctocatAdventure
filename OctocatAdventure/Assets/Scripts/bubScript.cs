@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class bubScript : MonoBehaviour {
     Rigidbody2D rb;
-    gmScript gm;
+	gmScript gm;
     public float lifetime = 5f;
     public GameObject poppin;
+	public bool bBounce = true;
 
-    public bool bBounce = true;
     public PhysicsMaterial2D bounce, normal;
 
     // Use this for initialization
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        //gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
-
-
+		gm = GameObject.Find("GameMaster").GetComponent<gmScript>();
+		bBounce = gm.bubBounce;
     }
 
     // Update is called once per frame

@@ -13,6 +13,7 @@ public class gmScript : MonoBehaviour {
 
 	public float bubSpeed = 2f;
 	public bool bubGravity = false;
+	public bool bubBounce = true;
        
     public bool bSwim = false;
 
@@ -42,6 +43,7 @@ public class gmScript : MonoBehaviour {
 
 			bubSpeed = GameObject.Find("BubSpeedSlider").GetComponent<Slider>().value;
 			bubGravity = GameObject.Find("BubGravityToggle").GetComponent<Toggle>().isOn;
+			bubBounce = GameObject.Find("BubBounceToggle").GetComponent<Toggle>().isOn;
         }
 
 
