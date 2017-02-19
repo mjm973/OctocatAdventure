@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\EnemyWalk.cs" />
      <Compile Include="Assets\Scripts\OctoScript.cs" />
      <Compile Include="Assets\Scripts\SnapToGrid.cs" />
-     <Compile Include="Assets\Scripts\TabScript.cs" />
      <Compile Include="Assets\Scripts\bubScript.cs" />
      <Compile Include="Assets\Scripts\gmScript.cs" />
  <Reference Include="UnityEngine.Analytics">
