@@ -38,11 +38,11 @@ public class gmScript : MonoBehaviour {
             pPanel = GameObject.Find("PausePanel");
         }
 
-		bool tabIsOn = playerTab.GetComponent<Toggle> ().isOn;
+		bool ptabIsOn = playerTab.GetComponent<Toggle> ().isOn;
 
         if (pPanel.activeInHierarchy) {
 
-			if (tabIsOn) {
+			if (ptabIsOn) {
 				foreach (GameObject i in playerControls) {
 					i.SetActive (true);
 				}
